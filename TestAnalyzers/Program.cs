@@ -11,3 +11,6 @@ var result = await c.DoQuery("1=1", "connection string...");
 
 foreach (var r in result)
     Console.WriteLine(r);
+
+RSPEC3649SQLiNoncompliant r = new RSPEC3649SQLiNoncompliant(new DapperContext(new System.Data.SqlClient.SqlConnection("connection string")));
+r.Authenticate("mY User");
