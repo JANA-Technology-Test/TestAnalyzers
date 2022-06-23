@@ -7,10 +7,11 @@ namespace WebApplication1.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        private readonly string _connectionString = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;";
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
 
@@ -34,7 +35,7 @@ namespace WebApplication1.Controllers
         [HttpGet(Name = "GetUserInfo")]
         public string Get(string username)
         {
-            using SqlConnection connection = new SqlConnection("connection string");
+            using SqlConnection connection = new SqlConnection(_connectionString);
             using SqlCommand command = connection.CreateCommand();
             command.CommandText = $"SELECT * FROM USERS WHERE USERNAME = '{username}'";
             var results = command.ExecuteReader();
