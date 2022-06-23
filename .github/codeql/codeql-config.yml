@@ -5,3 +5,5 @@ queries:
     uses: security-and-quality
   - name: Security Extended
     uses: security-extended
+  - name: codeql LGTM Full
+    uses: github/codeql/csharp/ql/src/codeql-suites/csharp-lgtm-full.qls@codeql-cli/latest
