@@ -34,4 +34,6 @@ jobs:
         uses: dotnet/code-analysis@main
         id: code-analysis
         with:
+          solution: TestAnalyzers.sln
           build-breaking: true
+          all-categories: all
