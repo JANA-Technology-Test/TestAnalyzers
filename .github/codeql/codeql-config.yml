@@ -6,4 +6,4 @@ queries:
   - name: Security Extended
     uses: security-extended
   - name: codeql LGTM Full
-    uses: github/codeql/csharp/ql/src/codeql-suites/csharp-lgtm-full.qls
+    uses: github/codeql/csharp/ql/src/codeql-suites/csharp-lgtm-full.qls@codeql-cli/latest
