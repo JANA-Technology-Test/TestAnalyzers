@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
             Response.Headers.Add("Set-Cookie", file);  // Noncompliant
             Response.Cookies.Append("ASP.NET_SessionId", file);
 
-            RSPEC2930Noncompliant noncompliant = new RSPEC2930Noncompliant();
+            using RSPEC2930Noncompliant noncompliant = new RSPEC2930Noncompliant();
             noncompliant.OpenResource(file);
             return "Ok";
         }

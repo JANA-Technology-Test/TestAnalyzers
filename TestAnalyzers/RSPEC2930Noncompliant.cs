@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestAnalyzers
 {
-    public class RSPEC2930Noncompliant
+    public class RSPEC2930Noncompliant : IDisposable
     {
-        private FileStream fs; // Noncompliant; Dispose or Close are never called
+        private FileStream fs;
+        private bool disposedValue;
 
         public void OpenResource(string path)
         {
@@ -17,9 +18,29 @@ namespace TestAnalyzers
 
         public void WriteToFile(string path, string text)
         {
-            var fs = new FileStream(path, FileMode.Open); // Noncompliant
+            using var fs2 = new FileStream(path, FileMode.Open);
             var bytes = Encoding.UTF8.GetBytes(text);
-            fs.Write(bytes, 0, bytes.Length);
+            fs2.Write(bytes, 0, bytes.Length);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    fs?.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
