@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using TestAnalyzers;
 
 namespace WebApplication1.Controllers
 {
@@ -40,6 +41,17 @@ namespace WebApplication1.Controllers
             command.CommandText = $"SELECT * FROM USERS WHERE USERNAME = '{username}'";
             var results = command.ExecuteReader();
             return "ok";
+        }
+
+        [HttpGet(Name = "Test")]
+        public string Get2(string file)
+        {
+            Response.Headers.Add("Set-Cookie", file);  // Noncompliant
+            Response.Cookies.Append("ASP.NET_SessionId", file);
+
+            RSPEC2930Noncompliant noncompliant = new RSPEC2930Noncompliant();
+            noncompliant.OpenResource(file);
+            return "Ok";
         }
     }
 }
